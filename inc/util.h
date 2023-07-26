@@ -26,6 +26,27 @@
 #define DOL_MSB                           1
 #define DOL_CUR                           2
 #define DOL_PPC                           1
+#define DOL_MAX                          11
+#define DOL_MIN                           7
+#define ELF_ID                           16 
+
+#endif
+
+#if defined(DOL_HEADER)
+#define DOL_HEADER
+#else
+#define DOL_HEADER
+
+typedef struct ELF
+{
+    static U16 BASE_SIZE;
+    static U16 PROGRAM_SIZE;
+    static U16 PPC;
+    static U16 TYPE;
+    static U32 HEADER_ENTRY;
+    static U32 OFFSET;
+    static char OBJ[ELF_ID];
+};
 
 #endif
 
