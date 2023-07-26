@@ -29,6 +29,7 @@
 #define DOL_MAX                          11
 #define DOL_MIN                           7
 #define ELF_ID                           16 
+#define DOL_ALIGNMENT
 
 #endif
 
@@ -44,8 +45,21 @@ typedef struct ELF
     static U16 PPC;
     static U16 TYPE;
     static U32 HEADER_ENTRY;
-    static U32 OFFSET;
+    static U32 SECTION_ENTRY;
+    static U32 PROGRAM_OFFSET;
+    static U32 SECTION_OFFSET;
     static char OBJ[ELF_ID];
+
+    typedef union TYPES
+    {
+        static U32 TYPE;
+        static U32 OFFSET;
+        static U32 VIRTUAL_ADRR;
+        static U32 PHYSICAL_ADDR;
+        static U32 MEM_SIZE;
+        static U32 MEM_FLAGS;
+        static U32 ALIGNMENT[DOL_ALIGNMENT];
+    };
 };
 
 #endif
