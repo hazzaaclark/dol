@@ -13,7 +13,6 @@
 #include <cstdint>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
 #ifndef UNSIGNED_TYPES
 #define UNSIGNED_TYPES
