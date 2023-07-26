@@ -57,15 +57,30 @@ typedef struct ELF
 
     typedef union TYPES
     {
-        static U32 TYPE;
-        static U32 OFFSET;
-        static U32 VIRTUAL_ADRR;
-        static U32 PHYSICAL_ADDR;
-        static U32 MEM_SIZE;
-        static U32 MEM_FLAGS;
-        static U32 ALIGNMENT[DOL_ALIGNMENT];
+        typedef U32 TYPE;
+        typedef U32 OFFSET;
+        typedef U32 VIRTUAL_ADRR;
+        typedef U32 PHYSICAL_ADDR;
+        typedef U32 MEM_SIZE;
+        typedef U32 MEM_FLAGS;
+        typedef U32 ALIGNMENT[DOL_ALIGNMENT];
     };
 };
+
+typedef struct DOL
+{
+    typedef void(*INC_ALLOC(ELF::TYPES::PHYSICAL_ADDR* ADDR, U32* MEM_STACK))(void);
+
+    typedef union TYPES
+    {
+        DOL* HEADER;
+        static U32 TEXT;
+        static U32 DATA;
+        static U32 FLAGS;
+        static FILE* ELF;
+    };
+};
+
 
 #endif
 
