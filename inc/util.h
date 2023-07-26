@@ -22,6 +22,11 @@
 
 #define SWAP_LITTLE_ENDIAN(VALUE)         (((VALUE) >> 8) | ((VALUE) << 8));
 
+#define DOL_I754                          0
+#define DOL_MSB                           1
+#define DOL_CUR                           2
+#define DOL_PPC                           1
+
 #endif
 
 #endif
