@@ -20,7 +20,10 @@
                                           | (((VALUE) << 8) &  0x00FF0000) | ((VALUE) << 24));
 
 
-#define SWAP_LITTLE_ENDIAN(VALUE)         (((VALUE) >> 8) | ((VALUE) << 8));
+#define SWAP_LITTLE_ENDIAN(VALUE)         (((VALUE) >> 8) | ((VALUE) << 8))
+
+#define MIN(VALUE_A, VALUE_B)             ((VALUE_A) < (VALUE_B) ? (VALUE_A) : (VALUE_B))
+#define MAX(VALUE_A, VALUE_B)             ((VALUE_A) > (VALUE_B) ? (VALUE_A) : (VALUE_B))
 
 #define DOL_I754                          0
 #define DOL_MSB                           1
@@ -29,7 +32,8 @@
 #define DOL_MAX                          11
 #define DOL_MIN                           7
 #define ELF_ID                           16 
-#define DOL_ALIGNMENT
+#define DOL_ALIGNMENT                     1
+#define DOL_HAS_BSS                       1
 
 #endif
 
@@ -57,28 +61,32 @@ typedef struct ELF
 
     typedef union TYPES
     {
-        typedef U32 TYPE;
-        typedef U32 OFFSET;
-        typedef U32 VIRTUAL_ADRR;
-        typedef U32 PHYSICAL_ADDR;
-        typedef U32 MEM_SIZE;
-        typedef U32 MEM_FLAGS;
-        typedef U32 ALIGNMENT[DOL_ALIGNMENT];
+        static U32 TYPE;
+        static U32 OFFSET;
+        static U32 VIRTUAL_ADRR;
+        static U32 PHYSICAL_ADDR;
+        static U32 MEM_SIZE;
+        static U32 MEM_FLAGS;
+        static U32 ALIGNMENT[DOL_ALIGNMENT];
     };
 };
 
 typedef struct DOL
 {
-    typedef void(*INC_ALLOC(ELF::TYPES::PHYSICAL_ADDR* ADDR, U32* MEM_STACK))(void);
+    typedef void(*INC_ALLOC(void));
+    static U32 ORG;
+    static U32 ORG_SIZE;
+    static U32 WRITTEN;
 
-    typedef union TYPES
-    {
-        DOL* HEADER;
-        static U32 TEXT;
-        static U32 DATA;
-        static U32 FLAGS;
-        static FILE* ELF;
-    };
+
+    DOL* HEADER;
+
+    static U32 TEXT;
+    static U32 DATA;
+    static U32 FLAGS;
+    static U32 ADDR;
+    static U32 SIZE;
+    static FILE* ELF;
 };
 
 
