@@ -34,7 +34,8 @@
 #define ELF_ID                           16 
 #define DOL_ALIGNMENT                     1
 #define DOL_HAS_BSS                       1
-
+#define DOL_READ_ARG                      0
+#define DOL_READ_ERROR(ARG)               { perror(ARG); exit(1); }
 #endif
 
 /* ALL OF THE INFORMATION PERTAINING TO THIS FILE TYPE CAN BE FOUND HERE */
@@ -77,9 +78,6 @@ typedef struct DOL
     static U32 ORG;
     static U32 ORG_SIZE;
     static U32 WRITTEN;
-
-
-    DOL* HEADER;
 
     static U32 TEXT;
     static U32 DATA;
