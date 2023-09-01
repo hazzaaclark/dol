@@ -58,7 +58,7 @@ static inline DOL::INC_ALLOC* INC_BSS_ALLOC(DOL* HEADER, ELF::TYPES* ELF)
 static void WRITE_CONTENTS(DOL* DOL, FILE* FILE, const char* OPEN_FILE)
 {
 	FILE = fopen(OPEN_FILE, "wb");
-	DOL->WRITTEN += fwrite(&DOL->HEADER, sizeof(DOL), NULL, NULL);
+	DOL->WRITTEN += fwrite(&DOL, sizeof(DOL), NULL, NULL);
 
 	WRITE_ENDIANESS((DOL), NULL);
 	fclose(FILE);
@@ -95,6 +95,10 @@ static void WRITE_ELF_TO_DOL(DOL* DOL, const char* OPEN_DOL)
 		fprintf(stderr, "Writing contents to DOL File\n");
 
 	DOL_FILE = fopen(OPEN_DOL, "wb");
+
+	if (!DOL_FILE)
+		DOL_READ_ERROR("Could not open DOL File, Header is invalid");
+
 }
 
 #endif
