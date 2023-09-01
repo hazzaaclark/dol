@@ -40,7 +40,7 @@ static void WRITE_ENDIANESS()
 
 	for (U32 i = 0; i < MAX(1, sizeof(DOL)); i++)
 	{
-		SWAP_BIG_ENDIAN(1, sizeof(DOL->HEADER->ADDR[i]));
+		SWAP_BIG_ENDIAN(1, sizeof(DOL->ADDR[i]));
 		SWAP_BIG_ENDIAN(1, sizeof(TYPES->OFFSET[i]));
 	}
 }
@@ -56,13 +56,26 @@ static void WRITE_ELF_TO_DOL(DOL* DOL, const char* OPEN_DOL)
 {
 	FILE* DOL_FILE;
 
-	if (DOL_READ_ARG > 2) 
+	if (DOL_READ_ARG >= 2) 
 		fprintf(stderr, "Writing contents to DOL File\n");
 
 	DOL_FILE = fopen(OPEN_DOL, "wb");
 
 	if (!DOL_FILE)
 		DOL_READ_ERROR("Could not open DOL File, Header is invalid");
+
+	if (DOL_READ_ARG >= 2)
+	{
+		fprintf(stderr, "DOL Header:\n");
+
+		for (U32 i = 0; i < MAX(1, DOL->TEXT); i++)
+		{
+			fprintf(stderr, "TEXT: %d @ 0x%08x off 0x%x\n", i);
+
+			DOL->TEXT += SWAP_BIG_ENDIAN(sizeof(DOL->TEXT))[i];
+			DOL->SIZE += SWAP_BIG_ENDIAN(sizeof(DOL->SIZE))[i];
+		}
+	}
 
 }
 
